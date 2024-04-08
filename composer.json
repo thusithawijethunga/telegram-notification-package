@@ -1,0 +1,32 @@
+{
+    "name": "promoxp/notification-telegram",
+    "description": "Telegram notification channel for Laravel applications",
+    "keywords": ["laravel", "telegram", "notification", "channel"],
+    "homepage": "https://telegram.promoxp.us",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thusitha Wijethunga",
+            "email": "thusithawijethunga@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Promoxp\\Telegram\\TelegramAppServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": "^7.3",
+        "illuminate/support": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Promoxp\\Telegram\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
