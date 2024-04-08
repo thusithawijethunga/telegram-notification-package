@@ -16,10 +16,10 @@ class TelegramChannel
             $message = $notification->toTelegram($notifiable);
 
             if (is_null($message->appkey())) {
-                $postData['appkey']         = config('telegram.appkey');
+                $postData['appkey']         = config('notification-telegram.appkey');
             }
 
-            $postData['authkey']            = config('telegram.authkey');
+            $postData['authkey']            = config('notification-telegram.authkey');
             $postData['campaign_name']      = $message->campaignName();
             
             if ($message->templateId()) {
@@ -33,7 +33,7 @@ class TelegramChannel
                 $postData['file']           = $message->fileUrl();
             }
 
-            $response = Http::post(config('telegram.api_url'), $postData);
+            $response = Http::post(config('notification-telegram.api_url'), $postData);
 
             $responseData = $response->json();
 
