@@ -12,14 +12,28 @@ class TelegramChannel
     public function send($notifiable, Notification $notification)
     {
         try {
+
             $message = $notification->toTelegram($notifiable);
 
-            $response = Http::post(config('telegram.api_url'), [
-                'appkey'        => config('telegram.appkey'),
-                'authkey'       => config('telegram.authkey'),
-                'template_id'   => $notification->templateId(),
-                'variables'     => $message->variables(),
-            ]);
+            if (is_null($message->appkey())) {
+                $postData['appkey']         = config('telegram.appkey');
+            }
+
+            $postData['authkey']            = config('telegram.authkey');
+            $postData['campaign_name']      = $message->campaignName();
+            
+            if ($message->templateId()) {
+                $postData['template_id']    = $message->templateId();
+                $postData['variables']      = $message->variables();
+            } else {
+                $postData['message']        = $message->message();
+            }
+
+            if ($message->fileUrl()) {
+                $postData['file']           = $message->fileUrl();
+            }
+
+            $response = Http::post(config('telegram.api_url'), $postData);
 
             $responseData = $response->json();
 
