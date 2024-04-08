@@ -11,13 +11,14 @@ class TelegramMessage
     protected $variables;
     protected $appkey;
 
-    public function __construct($campaignName, $message, $templateId, $variables, $appkey=null)
+    public function __construct($campaignName, $message, $fileUrl = null, $templateId = null, $variables = null, $appkey = null)
     {
         $this->campaignName = $campaignName;
-        $this->message      = $message;
-        $this->templateId   = $templateId;
-        $this->variables    = $variables;
-        $this->appkey       = $appkey;
+        $this->message = $message;
+        $this->templateId = $templateId;
+        $this->variables = $variables;
+        $this->appkey = $appkey;
+        $this->fileUrl = $fileUrl;
     }
 
     public function appkey()

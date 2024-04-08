@@ -37,6 +37,10 @@ class TelegramChannel
 
             $responseData = $response->json();
 
+            if($response->getStatusCode()==200){
+                return true;
+            };
+            
             // Check if the response contains an error message
             if (isset($responseData['error'])) {
                 // Log the error message
@@ -45,9 +49,7 @@ class TelegramChannel
                 throw new \Exception($responseData['error']);
             }
 
-            \Log::info('TelegramChannel:', $responseData);
-
-            return $responseData;
+            return false;
 
         } catch (RequestException $e) {
             // Handle HTTP request errors (e.g., connection errors)
